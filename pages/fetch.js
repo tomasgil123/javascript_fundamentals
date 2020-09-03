@@ -7,14 +7,13 @@ export default function Home() {
   const [counter, setCounter] = useState(0)
   useEffect(() => {
     setLoading(true)
-    new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(500)
-      }, 2000)
-    }).then((result) => {
-      setLoading(false)
-      setCounter(result)
-    })
+    fetch('https://jsonplaceholder.typicode.com/todos/1')
+      .then((result) => result.json())
+      .then((result) => {
+        setLoading(false)
+        setCounter(result.id)
+      })
+    setCounter(500)
   }, [])
 
   return (
